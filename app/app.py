@@ -23,10 +23,13 @@ st.set_page_config(
 # Load ML Artifacts
 # ==========================
 
-model = joblib.load(
-    "models/xgb_churn_model.pkl"
-)
+from xgboost import XGBClassifier
 
+model = XGBClassifier()
+
+model.load_model(
+    "models/xgb_churn_model.json"
+)
 preprocessor = joblib.load(
     "models/preprocessor.pkl"
 )
