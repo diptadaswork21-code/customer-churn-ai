@@ -51,8 +51,7 @@ Example insights:
 - Month-to-month contracts increase churn risk
 - Short customer tenure is associated with higher churn probability
 - Higher monthly charges can influence churn risk
-- Lack of support services can increase retention risk
-
+- Lack of support services can increase churn risk
 
 ## Model Performance
 
@@ -76,14 +75,16 @@ The application provides:
 
 ![Customer Churn Dashboard](image.png)
 
+## Installation
 
 ## Installation
 
-Clone the repository: git clone https://github.com/diptadaswork21-code/customer-churn-ai
+Clone the repository:
 
+```bash
+git clone https://github.com/diptadaswork21-code/customer-churn-ai.git
 
 Install requirements: pip install -r requirements.txt
-
 
 Run the application: streamlit run app/app.py
 
@@ -92,15 +93,18 @@ Run the application: streamlit run app/app.py
 
 customer-churn-ai/
 
-app/
-app.py
+├── app/
+│ └── app.py
 
-models/
-xgb_churn_model.pkl
-preprocessor.pkl
+├── models/
+│ ├── xgb_churn_model.pkl
+│ ├── preprocessor.pkl
+│ ├── shap_explainer.pkl
+│ └── feature_names.pkl
 
-notebooks/
-01_eda.ipynb
+├── notebooks/
+│ └── 01_eda.ipynb
 
-README.md
-requirements.txt
+├── README.md
+
+└── requirements.txt
