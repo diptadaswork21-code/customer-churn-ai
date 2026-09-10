@@ -77,8 +77,6 @@ The application provides:
 
 ## Installation
 
-## Installation
-
 Clone the repository:
 
 ```bash
