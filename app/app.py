@@ -7,6 +7,8 @@ import io
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 
+from xgboost import XGBClassifier
+
 
 # ==========================
 # Page Configuration
@@ -23,13 +25,12 @@ st.set_page_config(
 # Load ML Artifacts
 # ==========================
 
-from xgboost import XGBClassifier
-
 model = XGBClassifier()
 
 model.load_model(
     "models/xgb_churn_model.json"
 )
+
 preprocessor = joblib.load(
     "models/preprocessor.pkl"
 )
@@ -37,6 +38,7 @@ preprocessor = joblib.load(
 feature_names = joblib.load(
     "models/feature_names.pkl"
 )
+
 
 # ==========================
 # Feature Name Cleaner
@@ -76,24 +78,12 @@ def clean_feature_name(feature):
 
 
     if feature in mapping:
-
         return mapping[feature]
 
 
-    feature = feature.replace(
-        "cat__",
-        ""
-    )
-
-    feature = feature.replace(
-        "num__",
-        ""
-    )
-
-    feature = feature.replace(
-        "_",
-        " "
-    )
+    feature = feature.replace("cat__", "")
+    feature = feature.replace("num__", "")
+    feature = feature.replace("_", " ")
 
     return feature.title()
 
@@ -111,7 +101,6 @@ def create_pdf_report(
 ):
 
     buffer = io.BytesIO()
-
 
     pdf = canvas.Canvas(
         buffer,
@@ -136,13 +125,11 @@ def create_pdf_report(
         12
     )
 
-
     pdf.drawString(
         50,
         710,
         f"Prediction: {risk}"
     )
-
 
     pdf.drawString(
         50,
@@ -168,7 +155,6 @@ def create_pdf_report(
 
     y -= 30
 
-
     pdf.setFont(
         "Helvetica",
         12
@@ -184,7 +170,6 @@ def create_pdf_report(
         )
 
         y -= 20
-
 
 
     y -= 20
@@ -224,9 +209,7 @@ def create_pdf_report(
 
     pdf.save()
 
-
     buffer.seek(0)
-
 
     return buffer
 
@@ -247,6 +230,7 @@ with st.sidebar:
         XGBoost based churn prediction system.
 
         Includes:
+
         - Feature Importance Explainability
         - Risk Scoring
         - Business Recommendations
@@ -285,7 +269,6 @@ st.subheader(
 col1, col2, col3 = st.columns(3)
 
 
-
 with col1:
 
     gender = st.selectbox(
@@ -293,24 +276,20 @@ with col1:
         ["Male","Female"]
     )
 
-
     senior = st.selectbox(
         "Senior Citizen",
         ["No","Yes"]
     )
-
 
     partner = st.selectbox(
         "Partner",
         ["Yes","No"]
     )
 
-
     dependents = st.selectbox(
         "Dependents",
         ["Yes","No"]
     )
-
 
     tenure = st.number_input(
         "Tenure Months",
@@ -320,14 +299,12 @@ with col1:
     )
 
 
-
 with col2:
 
     phone_service = st.selectbox(
         "Phone Service",
         ["Yes","No"]
     )
-
 
     multiple_lines = st.selectbox(
         "Multiple Lines",
@@ -338,7 +315,6 @@ with col2:
         ]
     )
 
-
     internet = st.selectbox(
         "Internet Service",
         [
@@ -347,7 +323,6 @@ with col2:
             "No"
         ]
     )
-
 
     online_security = st.selectbox(
         "Online Security",
@@ -358,7 +333,6 @@ with col2:
         ]
     )
 
-
     online_backup = st.selectbox(
         "Online Backup",
         [
@@ -367,7 +341,6 @@ with col2:
             "No internet service"
         ]
     )
-
 
 
 with col3:
@@ -381,7 +354,6 @@ with col3:
         ]
     )
 
-
     tech_support = st.selectbox(
         "Tech Support",
         [
@@ -390,7 +362,6 @@ with col3:
             "No internet service"
         ]
     )
-
 
     streaming_tv = st.selectbox(
         "Streaming TV",
@@ -401,7 +372,6 @@ with col3:
         ]
     )
 
-
     streaming_movies = st.selectbox(
         "Streaming Movies",
         [
@@ -411,10 +381,11 @@ with col3:
         ]
     )
 
-
+# ==========================
+# Remaining Inputs
+# ==========================
 
 st.divider()
-
 
 
 contract = st.selectbox(
@@ -468,13 +439,12 @@ if st.button(
     "🚀 Predict Churn"
 ):
 
-
     customer = {
 
         "gender": gender,
 
         "SeniorCitizen":
-            1 if senior=="Yes" else 0,
+            1 if senior == "Yes" else 0,
 
         "Partner": partner,
 
@@ -512,7 +482,6 @@ if st.button(
     }
 
 
-
     df = pd.DataFrame(
         [customer]
     )
@@ -531,20 +500,23 @@ if st.button(
 
     if probability >= 0.7:
 
-        risk="HIGH RISK"
+        risk = "HIGH RISK"
 
-    elif probability >=0.4:
+    elif probability >= 0.4:
 
-        risk="MEDIUM RISK"
+        risk = "MEDIUM RISK"
 
     else:
 
-        risk="LOW RISK"
+        risk = "LOW RISK"
 
 
+
+    # ======================
+    # Prediction Display
+    # ======================
 
     st.divider()
-
 
     st.subheader(
         "Prediction Result"
@@ -556,7 +528,7 @@ if st.button(
 
             mode="gauge+number",
 
-            value=probability*100,
+            value=probability * 100,
 
             title={
                 "text":
@@ -568,7 +540,6 @@ if st.button(
                 "axis":{
                     "range":[0,100]
                 }
-
             }
         )
     )
@@ -576,17 +547,17 @@ if st.button(
 
     st.plotly_chart(
         fig,
-        use_container_width=True
+        width="stretch"
     )
 
 
-    if risk=="HIGH RISK":
+    if risk == "HIGH RISK":
 
         st.error(
             "🚨 HIGH RISK"
         )
 
-    elif risk=="MEDIUM RISK":
+    elif risk == "MEDIUM RISK":
 
         st.warning(
             "⚠️ MEDIUM RISK"
@@ -600,95 +571,86 @@ if st.button(
 
 
 
-# ======================
-# Feature Impact
-# ======================
-
-try:
-
-    feature_importance = model.feature_importances_
-
-    impact_values = feature_importance
-
-
-    explanation = pd.DataFrame(
-        {
-            "Feature": feature_names,
-            "Impact": impact_values
-        }
-    )
-
-
-    explanation["Importance"] = (
-        explanation["Impact"].abs()
-    )
-
-
-    top_features = (
-        explanation
-        .sort_values(
-            "Importance",
-            ascending=False
-        )
-        .head(5)
-    )
-
-
-    top_features["Feature"] = (
-        top_features["Feature"]
-        .apply(clean_feature_name)
-    )
-
-
-except Exception as e:
-
-    st.warning(
-        "Feature explanation unavailable for this prediction."
-    )
-
-    top_features = pd.DataFrame(
-        {
-            "Feature": [],
-            "Impact": [],
-            "Importance": []
-        }
-    )
-
+    # ======================
+    # Feature Impact
+    # ======================
 
     st.divider()
-
 
     st.subheader(
         "Churn Drivers"
     )
 
 
-    for _,row in top_features.iterrows():
+    try:
 
-        if row["Impact"] > 0:
+        feature_importance = model.feature_importances_
 
-            st.error(
-                f"🔴 {row['Feature']} increases churn risk"
+
+        explanation = pd.DataFrame(
+            {
+                "Feature": feature_names,
+                "Impact": feature_importance
+            }
+        )
+
+
+        explanation["Importance"] = (
+            explanation["Impact"].abs()
+        )
+
+
+        top_features = (
+            explanation
+            .sort_values(
+                "Importance",
+                ascending=False
+            )
+            .head(5)
+        )
+
+
+        top_features["Feature"] = (
+            top_features["Feature"]
+            .apply(clean_feature_name)
+        )
+
+
+        for _, row in top_features.iterrows():
+
+
+            st.write(
+                "🔹",
+                row["Feature"]
             )
 
-        else:
 
-            st.success(
-                f"🟢 {row['Feature']} reduces churn risk"
-            )
-
+        st.subheader(
+            "Feature Impact"
+        )
 
 
-    st.subheader(
-        "Feature Impact"
-    )
+        st.bar_chart(
+            top_features.set_index(
+                "Feature"
+            )["Impact"]
+        )
 
 
-    st.bar_chart(
-        top_features.set_index(
-            "Feature"
-        )["Impact"]
-    )
+    except Exception:
+
+
+        top_features = pd.DataFrame(
+            {
+                "Feature": [],
+                "Impact": []
+            }
+        )
+
+
+        st.warning(
+            "Feature explanation unavailable for this prediction."
+        )
 
 
 
@@ -696,10 +658,11 @@ except Exception as e:
     # Recommendations
     # ======================
 
-    recommendations=[]
+    recommendations = []
 
 
     for feature in top_features["Feature"]:
+
 
         if "Contract" in feature:
 
@@ -707,22 +670,25 @@ except Exception as e:
                 "Offer long term contract discounts"
             )
 
+
         if "Charges" in feature:
 
             recommendations.append(
                 "Review pricing strategy"
             )
 
+
         if "Security" in feature:
 
             recommendations.append(
-                "Offer security packages"
+                "Offer online security packages"
             )
+
 
         if "Technical" in feature:
 
             recommendations.append(
-                "Improve support engagement"
+                "Improve technical support engagement"
             )
 
 
@@ -735,20 +701,26 @@ except Exception as e:
     )
 
 
-    for item in recommendations:
+    if recommendations:
+
+        for item in recommendations:
+
+            st.write(
+                "✅",
+                item
+            )
+
+    else:
 
         st.write(
-            "✅",
-            item
+            "✅ Customer currently shows low retention risk."
         )
 
 
 
-# ======================
-# PDF Download
-# ======================
-
-if "probability" in locals():
+    # ======================
+    # PDF Download
+    # ======================
 
     pdf = create_pdf_report(
         probability,
@@ -767,9 +739,13 @@ if "probability" in locals():
 
 
 
+# ==========================
+# Footer
+# ==========================
+
 st.divider()
 
 
 st.caption(
-"Built with Python | XGBoost | Streamlit"
+    "Built with Python | XGBoost | Streamlit"
 )
