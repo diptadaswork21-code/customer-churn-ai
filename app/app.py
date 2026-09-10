@@ -40,7 +40,7 @@ feature_names = joblib.load(
 
 import shap
 
-explainer = shap.TreeExplainer(model)
+explainer = None
 
 # ==========================
 # Feature Name Cleaner
@@ -606,7 +606,29 @@ if st.button(
 
     # ======================
     # SHAP
-    # ======================
+# ======================
+
+try:
+
+    explainer = shap.TreeExplainer(model)
+
+    shap_output = explainer(
+        processed
+    )
+
+    shap_values = shap_output.values[0]
+
+
+except Exception:
+
+    st.warning(
+        "SHAP explanation unavailable for this prediction."
+    )
+
+    shap_values = [0] * len(feature_names)
+
+
+# ======================
 
     shap_output = explainer(
         processed
