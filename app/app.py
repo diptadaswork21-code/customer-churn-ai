@@ -247,7 +247,7 @@ with st.sidebar:
         XGBoost based churn prediction system.
 
         Includes:
-        - SHAP Explainability
+        - Feature Importance Explainability
         - Risk Scoring
         - Business Recommendations
         """
@@ -608,16 +608,21 @@ try:
 
     feature_importance = model.feature_importances_
 
-    impact_values = feature_importance * processed[0]
+    impact_values = feature_importance
 
-    explanation = pd.DataFrame({
-        "Feature": feature_names,
-        "Impact": impact_values
-    })
+
+    explanation = pd.DataFrame(
+        {
+            "Feature": feature_names,
+            "Impact": impact_values
+        }
+    )
+
 
     explanation["Importance"] = (
         explanation["Impact"].abs()
     )
+
 
     top_features = (
         explanation
@@ -627,6 +632,7 @@ try:
         )
         .head(5)
     )
+
 
     top_features["Feature"] = (
         top_features["Feature"]
@@ -640,12 +646,13 @@ except Exception as e:
         "Feature explanation unavailable for this prediction."
     )
 
-    top_features = pd.DataFrame({
-        "Feature": [],
-        "Impact": [],
-        "Importance": []
-    })
-
+    top_features = pd.DataFrame(
+        {
+            "Feature": [],
+            "Impact": [],
+            "Importance": []
+        }
+    )
 
 
     st.divider()
