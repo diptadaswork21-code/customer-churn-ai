@@ -744,34 +744,25 @@ except Exception as e:
 
 
 
-    # ======================
-    # PDF Download
-    # ======================
+# ======================
+# PDF Download
+# ======================
 
+if "probability" in locals():
 
     pdf = create_pdf_report(
-
         probability,
-
         risk,
-
         top_features["Feature"].tolist(),
-
         recommendations
-
     )
 
 
     st.download_button(
-
         "📄 Download Churn Report",
-
         pdf,
-
         file_name="customer_churn_report.pdf",
-
         mime="application/pdf"
-
     )
 
 
@@ -780,5 +771,5 @@ st.divider()
 
 
 st.caption(
-    "Built with Python | XGBoost | SHAP | Streamlit"
+"Built with Python | XGBoost | Streamlit"
 )
