@@ -1,6 +1,10 @@
-## Model Explainability
+## Model Explainability with SHAP
 
-SHAP analysis identified the main churn drivers:
+The final XGBoost model was interpreted using SHAP (SHapley Additive exPlanations) to understand both global and customer-level churn factors.
+
+### Key Churn Drivers Identified
+
+SHAP analysis highlighted the following factors influencing churn predictions:
 
 1. Month-to-month contracts
 2. Customer tenure
@@ -10,18 +14,15 @@ SHAP analysis identified the main churn drivers:
 6. Fiber optic internet service
 7. Electronic check payment method
 
-These insights can support targeted retention strategies.
+These insights help identify high-risk customers and support targeted retention strategies.
 
-## Explainability with SHAP
+### Customer-Level Explanations
 
-The final XGBoost model was interpreted using SHAP.
+SHAP local explanations provide individual prediction insights by showing which features increase or reduce a customer's churn probability.
 
-Example churn drivers identified:
+Example insights:
 
-- Month-to-month contracts
-- Low tenure
-- High monthly charges
-- Lack of online security
-- Lack of technical support
-
-SHAP local explanations provide customer-level reasons behind each prediction.
+- Month-to-month contracts increase churn risk
+- Short customer tenure is associated with higher churn probability
+- Higher monthly charges can influence churn risk
+- Lack of support services can increase retention risk
