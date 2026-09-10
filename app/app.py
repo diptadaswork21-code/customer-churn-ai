@@ -31,14 +31,13 @@ preprocessor = joblib.load(
     "models/preprocessor.pkl"
 )
 
-explainer = joblib.load(
-    "models/shap_explainer.pkl"
-)
-
 feature_names = joblib.load(
     "models/feature_names.pkl"
 )
 
+import shap
+
+explainer = shap.TreeExplainer(model)
 
 # ==========================
 # Feature Name Cleaner
