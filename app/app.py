@@ -38,8 +38,6 @@ feature_names = joblib.load(
     "models/feature_names.pkl"
 )
 
-import shap
-
 # ==========================
 # Feature Name Cleaner
 # ==========================
@@ -603,48 +601,50 @@ if st.button(
 
 
 # ======================
-# SHAP / Feature Impact
+# Feature Impact
 # ======================
 
 try:
 
     feature_importance = model.feature_importances_
 
-    shap_values = feature_importance * processed[0]
-
-except Exception:
-
-    st.warning(
-        "Feature explanation unavailable for this prediction."
-    )
-
-    shap_values = [0] * len(feature_names)
-
+    impact_values = feature_importance * processed[0]
 
     explanation = pd.DataFrame({
-
-        "Feature":feature_names,
-
-        "Impact":shap_values
-
+        "Feature": feature_names,
+        "Impact": impact_values
     })
-
 
     explanation["Importance"] = (
         explanation["Impact"].abs()
     )
 
-
-    top_features = explanation.sort_values(
-        "Importance",
-        ascending=False
-    ).head(5)
-
+    top_features = (
+        explanation
+        .sort_values(
+            "Importance",
+            ascending=False
+        )
+        .head(5)
+    )
 
     top_features["Feature"] = (
         top_features["Feature"]
         .apply(clean_feature_name)
     )
+
+
+except Exception as e:
+
+    st.warning(
+        "Feature explanation unavailable for this prediction."
+    )
+
+    top_features = pd.DataFrame({
+        "Feature": [],
+        "Impact": [],
+        "Importance": []
+    })
 
 
 
