@@ -620,15 +620,6 @@ except Exception:
 
     shap_values = [0] * len(feature_names)
 
-# ======================
-
-    shap_output = explainer(
-        processed
-    )
-
-
-    shap_values = shap_output.values[0]
-
 
     explanation = pd.DataFrame({
 
