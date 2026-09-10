@@ -1,5 +1,10 @@
 # Customer Churn Prediction AI
 
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![Machine Learning](https://img.shields.io/badge/Machine%20Learning-XGBoost-orange)
+![Explainability](https://img.shields.io/badge/Explainability-SHAP-green)
+![Deployment](https://img.shields.io/badge/App-Streamlit-red)
+
 ## Project Overview
 
 An end-to-end machine learning project that predicts customer churn using XGBoost and explains predictions using SHAP.
