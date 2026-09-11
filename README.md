@@ -1,41 +1,98 @@
 # Customer Churn Prediction AI
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
+
 ![Machine Learning](https://img.shields.io/badge/Machine%20Learning-XGBoost-orange)
-![Explainability](https://img.shields.io/badge/Explainability-SHAP-green)
+
+![Explainability](https://img.shields.io/badge/Explainability-Feature%20Importance-green)
+
 ![Deployment](https://img.shields.io/badge/App-Streamlit-red)
+
 
 ## Project Overview
 
-An end-to-end machine learning project that predicts customer churn using XGBoost and explains predictions using SHAP.
+An end-to-end machine learning application that predicts customer churn risk using XGBoost and provides actionable retention insights through a Streamlit dashboard.
+
 
 The project includes:
 
-- Data analysis
-- Model training
+- Exploratory Data Analysis
+- Data preprocessing
+- Model training and evaluation
 - XGBoost prediction
-- SHAP explainability
-- Streamlit dashboard
+- Feature importance explainability
+- Streamlit deployment
 - Customer retention recommendations
 
 
-## Business Problem
+---
 
-Customer churn affects subscription businesses.
+---
 
-This project helps companies:
+# Live Demo
+
+🚀 Streamlit Application:
+
+https://customer-churn-ai-mqwtfcvugrnpmus53nz7ta.streamlit.app/
+
+# Business Problem
+
+Customer churn is a major challenge for subscription-based businesses.
+
+This project helps organizations:
 
 - Identify customers likely to leave
-- Understand why customers churn
-- Take action to improve retention
+- Understand important churn factors
+- Prioritize retention strategies
 
-## Model Explainability with SHAP
 
-The final XGBoost model was interpreted using SHAP (SHapley Additive exPlanations) to understand both global and customer-level churn factors.
+---
 
-### Key Churn Drivers Identified
+# Machine Learning Workflow
 
-SHAP analysis highlighted the following factors influencing churn predictions:
+## Data Analysis
+
+Performed:
+
+- Data exploration
+- Feature analysis
+- Churn pattern investigation
+
+
+## Data Processing
+
+Implemented:
+
+- Numerical feature scaling
+- Categorical encoding
+- Preprocessing pipeline
+
+
+## Model Training
+
+Models evaluated:
+
+| Model | ROC-AUC |
+|---|---|
+| Logistic Regression | 0.836 |
+| Random Forest | 0.814 |
+| XGBoost | 0.836 |
+
+
+Final Production Model:
+
+**XGBoost Classifier**
+
+
+---
+
+# Model Explainability
+
+Feature importance analysis was used to understand the main factors influencing churn predictions.
+
+## Key Churn Drivers
+
+Important churn factors identified:
 
 1. Month-to-month contracts
 2. Customer tenure
@@ -45,69 +102,60 @@ SHAP analysis highlighted the following factors influencing churn predictions:
 6. Fiber optic internet service
 7. Electronic check payment method
 
-These insights help identify high-risk customers and support targeted retention strategies.
 
-### Customer-Level Explanations
-
-SHAP local explanations provide individual prediction insights by showing which features increase or reduce a customer's churn probability.
-
-Example insights:
-
-- Month-to-month contracts increase churn risk
-- Short customer tenure is associated with higher churn probability
-- Higher monthly charges can influence churn risk
-- Lack of support services can increase churn risk
-
-## Model Performance
-
-| Model | ROC-AUC |
-|---|---|
-| Logistic Regression | 0.836 |
-| Random Forest | 0.814 |
-| XGBoost | 0.836 |
+These insights help businesses design targeted retention strategies.
 
 
-## Streamlit Dashboard
+---
+
+# Streamlit Dashboard
 
 The application provides:
 
 - Churn probability prediction
 - Low / Medium / High risk classification
-- SHAP explanations
 - Feature impact visualization
 - Retention recommendations
+- PDF customer churn report
 
 
 ![Customer Churn Dashboard](image.png)
 
-## Installation
 
-Clone the repository:
+---
+
+# Technology Stack
+
+- Python
+- Pandas
+- Scikit-learn
+- XGBoost
+- Streamlit
+- Plotly
+- ReportLab
+
+
+---
+
+# Installation
+
+Clone repository:
 
 ```bash
 git clone https://github.com/diptadaswork21-code/customer-churn-ai.git
 
-Install requirements: pip install -r requirements.txt
+cd customer-churn-ai
 
-Run the application: streamlit run app/app.py
+pip install -r requirements.txt
+
+streamlit run app/app.py
 
 
-## Project Structure
+---
 
-customer-churn-ai/
+# Future Improvements
 
-├── app/
-│ └── app.py
-
-├── models/
-│ ├── xgb_churn_model.pkl
-│ ├── preprocessor.pkl
-│ ├── shap_explainer.pkl
-│ └── feature_names.pkl
-
-├── notebooks/
-│ └── 01_eda.ipynb
-
-├── README.md
-
-└── requirements.txt
+- Add automated model retraining pipeline
+- Add model monitoring
+- Integrate real-time customer databases
+- Deploy with Docker and cloud infrastructure
