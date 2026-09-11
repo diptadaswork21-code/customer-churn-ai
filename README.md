@@ -96,14 +96,6 @@ Multiple machine learning models were evaluated:
 | **Performance** | **0.836** |
 | **Production Model** | `xgb_churn_model.json` |
 
-### 📦 Production Model
-
-```text
-xgb_churn_model.json
-```
-
-> **ROC-AUC: 0.836** — Final XGBoost model selected for production deployment.
-
 
 ---
 
