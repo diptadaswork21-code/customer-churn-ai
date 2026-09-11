@@ -25,12 +25,13 @@ The project covers the complete machine learning workflow:
 
 - Exploratory Data Analysis
 - Data preprocessing
+- Feature engineering
 - Model training and evaluation
 - XGBoost classification
-- Feature importance interpretation
+- Feature importance analysis
 - Streamlit deployment
 - Customer retention recommendations
-- PDF churn analysis report generation
+- PDF churn report generation
 
 
 ---
@@ -39,7 +40,7 @@ The project covers the complete machine learning workflow:
 
 Customer churn is a major challenge for subscription-based businesses.
 
-Losing customers directly impacts revenue and growth.
+Losing customers directly impacts revenue, growth, and customer lifetime value.
 
 This project helps organizations:
 
@@ -60,8 +61,8 @@ Performed:
 
 - Dataset exploration
 - Feature analysis
-- Churn pattern investigation
 - Customer behavior analysis
+- Churn pattern investigation
 
 
 ## Data Processing
@@ -69,7 +70,7 @@ Performed:
 Implemented:
 
 - Missing value handling
-- Numerical feature scaling
+- Numerical feature processing
 - Categorical feature encoding
 - Scikit-learn preprocessing pipeline
 
@@ -92,17 +93,13 @@ Multiple machine learning models were evaluated:
 
 Evaluation Metric:
 
-```
-ROC-AUC
-```
+**ROC-AUC**
 
 Performance:
 
-```
-0.836
-```
+**0.836**
 
-Production model format:
+Production model:
 
 ```
 xgb_churn_model.json
@@ -113,12 +110,12 @@ xgb_churn_model.json
 
 # Model Interpretability
 
-Feature importance analysis was applied to understand which customer attributes influence churn predictions.
+Feature importance analysis was used to understand which customer attributes have the highest influence on churn predictions.
 
 
 ## Key Churn Drivers
 
-The model identified these important churn factors:
+The model identified the following important churn factors:
 
 1. Month-to-month contracts
 
@@ -135,22 +132,22 @@ The model identified these important churn factors:
 7. Electronic check payment method
 
 
-These insights help businesses create targeted retention strategies.
+These insights help businesses design targeted retention strategies.
 
 
 ---
 
 # Streamlit Dashboard
 
-
-The application provides:
+The deployed application provides:
 
 
 ## Customer Risk Prediction
 
+- Customer information input
 - Churn probability prediction
 - Low / Medium / High risk classification
-- Interactive customer prediction interface
+- Interactive prediction interface
 
 
 ## Feature Impact Visualization
@@ -166,12 +163,12 @@ The system generates actionable recommendations:
 - Offer long-term contract discounts
 - Review pricing strategy
 - Improve support engagement
-- Recommend additional security services
+- Recommend additional customer services
 
 
 ## PDF Churn Report
 
-Users can download a customer analysis report containing:
+Users can download customer analysis reports containing:
 
 - Prediction result
 - Churn probability
@@ -182,82 +179,95 @@ Users can download a customer analysis report containing:
 
 ---
 
-# Application Screenshot
-
-
-![Customer Churn Dashboard](image.png)
-
-
----
-
 # Project Architecture
 
 
 ```
 Customer Data
-      |
-      v
+
+        |
+
+        v
+
 Exploratory Data Analysis
-      |
-      v
+
+        |
+
+        v
+
 Data Cleaning & Preprocessing
-      |
-      v
+
+        |
+
+        v
+
 Feature Engineering
-      |
-      v
+
+        |
+
+        v
+
 Machine Learning Models
 
-(Logistic Regression
- Random Forest
+(Logistic Regression,
+ Random Forest,
  XGBoost)
 
-      |
-      v
+        |
+
+        v
 
 Model Evaluation
 
 (ROC-AUC Comparison)
 
-      |
-      v
+        |
+
+        v
 
 XGBoost Production Model
 
-      |
-      v
+        |
+
+        v
 
 Streamlit Application
 
-      |
-      v
+        |
+
+        v
 
 Customer Input
 
-      |
-      v
+        |
+
+        v
 
 Churn Probability Prediction
 
-      |
-      v
+        |
+
+        v
 
 Risk Classification
 
 (Low / Medium / High)
 
-      |
-      v
+        |
+
+        v
 
 Feature Importance Analysis
 
-      |
-      v
+        |
+
+        v
 
 Retention Recommendations
 
-      |
-      v
+        |
+
+        v
 
 PDF Churn Report
 ```
@@ -306,31 +316,24 @@ customer-churn-ai/
 
 ├── app/
 │   └── app.py
-
+│
 ├── data/
 │   └── WA_Fn-UseC_-Telco-Customer-Churn.csv
-
+│
 ├── models/
 │   ├── feature_names.pkl
 │   ├── preprocessor.pkl
-│   ├── xgb_churn_model.json
-│   └── xgb_churn_model.pkl
-
+│   └── xgb_churn_model.json
+│
 ├── notebooks/
 │   └── 01_eda.ipynb
-
+│
 ├── src/
-
-├── image.png
-
+│
 ├── requirements.txt
-
 ├── runtime.txt
-
 ├── README.md
-
 ├── LICENSE
-
 └── .gitignore
 ```
 
@@ -372,12 +375,12 @@ streamlit run app/app.py
 
 # Future Improvements
 
-- Add automated model retraining pipeline
-- Add model monitoring system
-- Integrate real-time customer database
-- Add Docker deployment
-- Add advanced explainability methods
-- Build API endpoint for predictions
+- Automated model retraining pipeline
+- Model monitoring system
+- Real-time customer database integration
+- Docker deployment
+- Advanced analytics dashboard
+- API endpoint for predictions
 
 
 ---
