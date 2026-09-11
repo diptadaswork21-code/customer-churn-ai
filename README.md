@@ -6,7 +6,9 @@
 ![Deployment](https://img.shields.io/badge/App-Streamlit-red)
 
 
-## Live Demo 🚀
+---
+
+# Live Demo 🚀
 
 Streamlit Application:
 
@@ -90,16 +92,21 @@ Multiple machine learning models were evaluated:
 
 Evaluation Metric:
 
+```
 ROC-AUC
+```
 
 Performance:
 
+```
 0.836
+```
 
 Production model format:
 
+```
 xgb_churn_model.json
-
+```
 
 
 ---
@@ -112,7 +119,6 @@ Feature importance analysis was applied to understand which customer attributes 
 ## Key Churn Drivers
 
 The model identified these important churn factors:
-
 
 1. Month-to-month contracts
 
@@ -133,7 +139,6 @@ These insights help businesses create targeted retention strategies.
 
 
 ---
-
 
 # Streamlit Dashboard
 
@@ -177,7 +182,6 @@ Users can download a customer analysis report containing:
 
 ---
 
-
 # Application Screenshot
 
 
@@ -185,7 +189,6 @@ Users can download a customer analysis report containing:
 
 
 ---
-
 
 # Project Architecture
 
@@ -230,10 +233,12 @@ Streamlit Application
       v
 
 Customer Input
+
       |
       v
 
 Churn Probability Prediction
+
       |
       v
 
@@ -245,15 +250,18 @@ Risk Classification
       v
 
 Feature Importance Analysis
+
       |
       v
 
 Retention Recommendations
+
       |
       v
 
 PDF Churn Report
 ```
+
 
 ---
 
@@ -286,9 +294,7 @@ PDF Churn Report
 ## Reporting
 
 - ReportLab
-```
 
----
 
 ---
 
@@ -328,6 +334,7 @@ customer-churn-ai/
 └── .gitignore
 ```
 
+
 ---
 
 # Installation
@@ -360,10 +367,10 @@ pip install -r requirements.txt
 streamlit run app/app.py
 ```
 
+
 ---
 
 # Future Improvements
-
 
 - Add automated model retraining pipeline
 - Add model monitoring system
@@ -371,13 +378,10 @@ streamlit run app/app.py
 - Add Docker deployment
 - Add advanced explainability methods
 - Build API endpoint for predictions
-```
+
 
 ---
 
 # License
 
 This project is licensed under the MIT License.
-```
-
-
